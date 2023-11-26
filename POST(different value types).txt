@@ -1,0 +1,227 @@
+documentation: https://woocommerce.github.io/woocommerce-rest-api-docs/#products
+
+POST (snippets to cover different value types)
+
+var responseResult = pm.response.json();
+
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
+
+pm.test("Status code name has string 'Created'", function () {
+    pm.response.to.have.status("Created");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Response json body is not empty", ()=>{
+    pm.response.to.be.json;
+    pm.expect(responseResult).not.be.empty;
+});
+
+pm.test("Response contain 'name' field", ()=>{
+    pm.expect(responseResult.name).to.exist;
+});
+
+pm.test("Response 'name; field is equal to 'Test Product780~!@#$%^&*()'", ()=>{
+    pm.expect(responseResult.name).to.eql("Test Product780~!@#$%^&amp;*()");
+});
+
+pm.test("Response 'name' field should contain at least 1 char", ()=>{
+    pm.expect(responseResult.name.length).to.be.at.least(1);
+});
+
+pm.test("Response 'name' field should contain at most 1000 chars", ()=>{
+    pm.expect(responseResult.name.length).to.be.at.most(1000);
+});
+
+pm.test("Response 'name' field should match pattern", ()=>{
+    pm.expect(responseResult.name).to.match(/^[a-zA-Z0-9!@#$%^&*()_+\-={};':"|,.<>?]*$/);
+});
+
+pm.test("Response 'name' field contains specific length", ()=>{
+    pm.expect(responseResult.name.length).to.eql(30)
+});
+
+pm.test("Response 'name' field are in correct format", ()=>{
+    pm.expect(responseResult.name).to.be.a('string')
+});
+
+pm.test("Response should contain 'type' filed", ()=>{
+    pm.expect(responseResult.type).to.exist;
+});
+
+pm.test("Response 'type' field value should be equal to 'external'", ()=>{
+    pm.expect(responseResult.type).to.eql("external");
+});
+
+pm.test("Response 'type' field has string data type", ()=>{
+    pm.expect(responseResult.type).to.be.a('string');
+});
+
+pm.test("Response 'type' field has specified length", ()=>{
+    pm.expect(responseResult.type.length).to.eql(8);
+});
+
+pm.test("Response contains 'featured' field", ()=>{
+    pm.expect(responseResult.featured).to.exist;
+});
+
+pm.test("Response 'featured' field is equal to true", ()=>{
+    pm.expect(responseResult.featured).to.eql(true);
+});
+
+pm.test("Response 'featured' field type is boolean", ()=>{
+    pm.expect(responseResult.featured).to.be.a('boolean');
+});
+
+pm.test("Response contains 'total_sales' field", ()=>{
+    pm.expect(responseResult.total_sales).to.exist;
+});
+
+pm.test("Response 'total_sales' field is equal to 2", ()=>{
+    pm.expect(responseResult.total_sales).to.eql(2);
+});
+
+pm.test("Response 'total_sales' field should be a number", ()=>{
+    pm.expect(responseResult.total_sales).to.be.a('number');
+});
+
+pm.test("Response 'total_sales' field should match pattern", ()=>{
+    pm.expect(responseResult.total_sales).match(/^[0-9]*$/)
+});
+
+pm.test("Response 'categories' field exist", ()=>{
+    pm.expect(responseResult.categories).to.exist;
+});
+
+pm.test("Response 'categories' field is array", ()=>{
+    pm.expect(responseResult.categories).to.be.a('array');
+});
+
+pm.test("Response 'categories' field length is 2", ()=>{
+    pm.expect(responseResult.categories.length).to.eql(2);
+});
+
+pm.test("Response 'id' category fields are numbers", ()=>{
+    for(var key of responseResult.categories){
+        pm.expect(key.id).to.be.a('number');
+    };
+});
+
+pm.test("Response 'id' of category[0] is equal to 34", ()=>{
+    pm.expect(responseResult.categories[0].id).to.eql(34);
+});
+
+pm.test("Response 'id' of category[1] is equal to 35", ()=>{
+    pm.expect(responseResult.categories[1].id).to.eql(35);
+});
+
+pm.test("Response 'categories' array elements contain 'name' field", ()=>{
+    for(var key of responseResult.categories){
+        pm.expect(key.name.to.exist);
+    };
+});
+
+pm.test("Response 'name' category fields are string", ()=>{
+    for(var key of responseResult.categories){
+        pm.expect(key.name).to.be.a('string');
+    };
+});
+
+pm.test("Response 'name' of category[0] is equal to 'first'", ()=>{
+    pm.expect(responseResult.categories[0].name).to.eql("first");
+});
+
+pm.test("Response 'name' of category[1] is equal to 'second'", ()=>{
+    pm.expect(responseResult.categories[1].name).to.eql("second");
+});
+
+pm.test("Response 'slug' category fields are not empty", ()=>{
+    for(var key of responseResult.categories){
+        pm.expect(key.slug).not.be.empty;
+    };
+});
+
+pm.test("Response 'slug' categories fields are string", ()=>{
+    for(var key of responseResult.categories){
+        pm.expect(key.slug).to.be.a('string');
+    };
+});
+
+pm.test("Response 'dimensions' field exist",()=>{
+    pm.expect(responseResult.dimensions).to.exist;
+});
+
+pm.test("Response 'dimensions' field is object", ()=>{
+    pm.expect(responseResult.dimensions).to.be.a('object');
+});
+
+pm.test("Response dimensions 'length' field is equal to '45'", ()=>{
+    pm.expect(responseResult.dimensions.length).to.eql("45");
+});
+
+pm.test("Response dimensions 'width' field is equal to '700'", ()=>{
+    pm.expect(responseResult.dimensions.width).to.eql("700");
+});
+
+pm.test("Response dimensions 'height' field is equal to '3'", ()=>{
+    pm.expect(responseResult.dimensions.height).to.eql("3");
+});
+
+pm.test("Response dimension 'length' field is in string format", ()=>{
+    pm.expect(responseResult.dimensions.length).to.be.a('string');
+});
+
+pm.test("Response dimension 'width' field is in string format", ()=>{
+    pm.expect(responseResult.dimensions.width).to.be.a("string");
+});
+
+pm.test("Response dimensions 'height' field is in string format", ()=>{
+    pm.expect(responseResult.dimensions.height).to.be.a("string");
+});
+
+Body:
+
+{
+    "name": "Test Product780~!@#$%^&*()",
+    "type": "external",
+    "status": "publish",
+    "featured": true,
+    "description": "test new API doc",
+    "short decription": "test",
+    "price": "45.7",
+    "regular_price": "45.7",
+    "sale_price": "40",
+    "on_sale": false,
+    "purchasable": true,
+    "total_sales": 2,
+    "virtual": false,
+    "downloadable": true,
+    "downloads": [
+        {
+            "name": "allowedPages"
+        }
+    ],
+    "download_limit": 5,
+    "download_expiry": 5,
+    "button_text": "Download",
+    "backorders_allowed": false,
+    "dimensions": {
+        "length": "45",
+        "width": "700",
+        "height": "3"
+    },
+    "categories": [
+        {
+            "id": 34,
+            "name": "first"
+        },
+        {
+            "id": 35,
+            "name": "second"
+        }
+    ]
+}
