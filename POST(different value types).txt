@@ -49,6 +49,10 @@ pm.test("Response 'name' field are in correct format", ()=>{
     pm.expect(responseResult.name).to.be.a('string')
 });
 
+pm.test("Response 'permalink' field should be a valid url", ()=>{
+    pm.expect(responseResult.permalink).match(/^https?:\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+$/);
+});
+
 pm.test("Response should contain 'type' filed", ()=>{
     pm.expect(responseResult.type).to.exist;
 });
