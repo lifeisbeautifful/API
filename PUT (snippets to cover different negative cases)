@@ -1,0 +1,42 @@
+documentation: https://woocommerce.github.io/woocommerce-rest-api-docs/#products
+
+1) User is not able to create PUT request without authorization:
+
+pm.test("Status code is 401", function () {
+    pm.response.to.have.status(401);
+});
+
+pm.test("Status code name has string 'Unauthorized'", function () {
+    pm.response.to.have.status("Unauthorized");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Response json body is not empty", ()=>{
+    pm.response.to.be.json;
+    pm.expect(pm.response.json()).not.be.empty;
+});
+
+pm.test("Response 'code' field value is equal to 'woocommerce_rest_cannot_edit'", ()=>{
+    pm.expect(pm.response.json().code).to.eql("woocommerce_rest_cannot_edit");
+});
+
+pm.test("Response 'message' field value is equl to 'У вас недостаточно прав для редактирования этого ресурса.'", ()=>{
+    pm.expect(pm.response.json().message).to.eql("У вас недостаточно прав для редактирования этого ресурса.");
+});
+
+Body:
+
+{
+   "name": "Updated name"
+}
+
+2) User is not able to change read-only 'id' field value
+
+Body:
+
+{
+   "id": 1165
+}
