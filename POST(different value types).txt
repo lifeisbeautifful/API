@@ -2,7 +2,7 @@ documentation: https://woocommerce.github.io/woocommerce-rest-api-docs/#products
 
 POST (snippets to cover different value types)
 
-var responseResult = pm.response.json();
+const responseResult = pm.response.json();
 
 pm.test("Status code is 201", function () {
     pm.response.to.have.status(201);
