@@ -1,0 +1,36 @@
+const responseJson = pm.response.json()
+
+pm.test("Status code is 400", function () {
+    pm.response.to.have.status(400);
+});
+
+pm.test("Status code name has string 'Bad Request'", function () {
+    pm.response.to.have.status("Bad Request");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Response json is not empty", ()=>{
+    pm.response.to.be.json;
+    pm.expect(responseJson).not.be.empty;
+});
+
+pm.test("Response 'code' field is equal to 'rest_invalid_json'", ()=>{
+    pm.expect(responseJson.code).to.eql("rest_invalid_json");
+});
+
+pm.test("Response 'message' field is equal to 'Отправлено неверное тело запроса JSON.'", ()=>{
+    pm.expect(responseJson.message).to.eql("Отправлено неверное тело запроса JSON.");
+});
+
+pm.test("Response data json error message is equal to 'Syntax error'", ()=>{
+    pm.expect(responseJson.data.json_error_message).to.eql("Syntax error");
+});
+
+Body:
+
+{
+    "featured": fase
+}
