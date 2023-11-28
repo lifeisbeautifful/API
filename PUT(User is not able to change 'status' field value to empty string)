@@ -1,0 +1,53 @@
+const responseJson = pm.response.json()
+
+
+pm.test("Status code is 400", function () {
+    pm.response.to.have.status(400);
+});
+
+pm.test("Status code name has string 'Bad Request'", function () {
+    pm.response.to.have.status("Bad Request");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Response json is not empty", ()=>{
+    pm.response.to.be.json;
+    pm.expect(responseJson).not.be.empty;
+});
+
+pm.test("Response 'code' field exists", ()=>{
+    pm.expect(responseJson.code).to.exist;
+});
+
+pm.test("Response 'code' field is equal to 'rest_invalid_param'", ()=>{
+    pm.expect(responseJson.code).to.eql("rest_invalid_param");
+});
+
+pm.test("Response 'message' field to exist", ()=>{
+    pm.expect(responseJson.message).to.exist;
+});
+
+pm.test("Response 'message' field is equal to 'Неверный параметр: status'", ()=>{
+    pm.expect(responseJson.message).to.eql("Неверный параметр: status");
+});
+
+pm.test("Response data type message is equal to 'status не принадлежит к draft, pending, private, publish, future, auto-draft и trash.'", ()=>{
+    pm.expect(responseJson.data.params.status).to.eql("status не принадлежит к draft, pending, private, publish, future, auto-draft и trash.");
+});
+
+pm.test("Response details message is equal to 'status не принадлежит к draft, pending, private, publish, future, auto-draft и trash.'", ()=>{
+    pm.expect(responseJson.data.details.status.message).to.eql("status не принадлежит к draft, pending, private, publish, future, auto-draft и trash.");
+});
+
+pm.test("Response details data is null", ()=>{
+    pm.expect(responseJson.data.details.status.data).to.be.null;
+});
+
+Body:
+
+{
+    "status": ""
+}
