@@ -1,0 +1,38 @@
+const responseJson = pm.response.json()
+
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Status code name has string 'OK'", function () {
+    pm.response.to.have.status("OK");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Response json is not empty", ()=>{
+    pm.response.to.be.json;
+    pm.expect(responseJson).not.be.empty;
+});
+
+pm.test("Response 'featured' field is equal to false", ()=>{
+    pm.expect(responseJson.featured).to.eql(false);
+});
+
+pm.test("Response 'featured' field to be in a boolean format", ()=>{
+    pm.expect(responseJson.featured).to.be.a('boolean');
+});
+
+//Check for all/main fields
+pm.test("Response 'id' field is equal to 11142", ()=>{
+    pm.expect(responseJson.id).to.eql(11142);
+});
+
+Body:
+
+{
+    "featured": false
+}
