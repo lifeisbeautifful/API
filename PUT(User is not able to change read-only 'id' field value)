@@ -1,0 +1,44 @@
+
+
+const responseJson = pm.response.json();
+
+
+pm.test("Status code is 400", function () {
+    pm.response.to.have.status(400);
+});
+
+pm.test("Status code name has string 'BadRequest'", function () {
+    pm.response.to.have.status("Bad Request");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Json is not empty", function() {
+    pm.response.to.be.json;
+    pm.expect(responseJson).not.to.be.empty;
+});
+
+pm.test("Response 'code' field exists", ()=>{
+    pm.expect(responseJson.code).to.exist;
+});
+
+pm.test("Response json 'code' field is equal to 'rest_invalid_param'", ()=>{
+    pm.expect(responseJson.code).to.eql("rest_invalid_param");
+});
+
+pm.test("Response json 'message' field exists", ()=>{
+    pm.expect(responseJson.message).to.exist;
+});
+
+pm.test("Response json 'message' field is equal to 'Неверный параметр: id'", ()=>{
+    pm.expect(responseJson.message).to.eql("Неверный параметр: id");
+});
+
+
+Body:
+
+{
+   "id": 1165
+}
