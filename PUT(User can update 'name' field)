@@ -1,0 +1,43 @@
+const responseJson = pm.response.json()
+
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Status code name has string 'OK'", function () {
+    pm.response.to.have.status("OK");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Response json is not empty", ()=>{
+    pm.response.to.be.json;
+    pm.expect(responseJson).not.be.empty;
+});
+
+pm.test("Response 'name' field should be 'Updated name'", ()=>{
+    pm.expect(responseJson.name).to.eql("Updated name");
+});
+
+pm.test("Response 'name' field is in correct format", ()=>{
+    pm.expect(responseJson.name).to.be.a('string');
+});
+
+//Check for all/main fields
+pm.test("Response 'id' field exists", ()=>{
+    pm.expect(responseJson.id).to.exist;
+});
+
+//Check for all/main fields
+pm.test("Response json 'id' is equal to 11142", ()=>{
+    pm.expect(responseJson.id).to.eql(11142);
+});
+
+Body:
+
+{
+    "name": "Updated name"
+}
