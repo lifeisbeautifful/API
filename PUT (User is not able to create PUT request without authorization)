@@ -32,11 +32,3 @@ Body:
 {
    "name": "Updated name"
 }
-
-2) User is not able to change read-only 'id' field value
-
-Body:
-
-{
-   "id": 1165
-}
