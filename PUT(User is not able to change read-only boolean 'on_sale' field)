@@ -1,0 +1,40 @@
+const responseJson = pm.response.json()
+
+
+pm.test("Status code is 400", function () {
+    pm.response.to.have.status(400);
+});
+pm.test("Status code name has string 'Bad Request'", function () {
+    pm.response.to.have.status("Bad Request");
+});
+
+pm.test("Response time is less than 2000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(2000);
+});
+
+pm.test("Response json is not empty", ()=>{
+    pm.response.to.be.json;
+    pm.expect(responseJson).not.be.empty;
+});
+
+pm.test("Response 'code' field exists", ()=>{
+    pm.expect(responseJson.code).to.exist;
+});
+
+pm.test("Response 'code' is equal 'rest_invalid_param'", ()=>{
+    pm.expect(responseJson.code).to.eql("rest_invalid_param");
+});
+
+pm.test("Response json 'message' field exists", ()=>{
+    pm.expect(responseJson.message).to.exist;
+});
+
+pm.test("Response json 'message' field is equal to 'Неверный параметр: on_sale'", ()=>{
+    pm.expect(responseJson.message).to.eql("Неверный параметр: on_sale");
+});
+
+Body:
+
+{
+    "on_sale": false
+}
